@@ -1,0 +1,23 @@
+﻿@using Air.Domain.Entities
+@using Сосновский.UI
+<h3>Детали</h3>
+
+
+
+	@if(airplane!=null)
+	{
+	<div class="card mt-5" style="width: 18rem;">
+		<img src="@airplane.Image" class="card-img-top" alt="...">
+	<div class="card-body">
+			<h5 class="card-title">@airplane.Name</h5>
+			<p class="card-text">@airplane.Description</p>
+
+	</div>
+	</div>
+	}
+	@code {
+	[Parameter]
+	public Airplane airplane { get; set; }
+	[Parameter]
+	public EventCallback<AirDetails> AirplaneChanged { get; set; }
+	}

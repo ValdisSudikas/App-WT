@@ -1,0 +1,29 @@
+﻿@page "/products"
+@using Air.Domain.Entities
+@using Air.Domain.Models
+@using BlazorApp.Components.ProductComponents
+@using BlazorApp.Services
+
+@rendermode InteractiveServer
+
+<CascadingValue Value="ProductService">
+<AirList AirplaneSelected="ShowDetails" />
+<Pager/>
+</CascadingValue>
+
+<AirDetails Airplane="SelectedAirplane" />
+
+@code {
+[Inject] IProductService<Airplane> ProductService { get; set; }
+
+[Parameter]
+	public Airplane SelectedAirplane { get; set; }
+	protected override async Task OnInitializedAsync()
+	{
+	await ProductService.GetProducts();
+	}
+	void ShowDetails(int id)
+	{
+	SelectedAirplane = ProductService.Products.First(d => d.Id == id);
+	}
+}
